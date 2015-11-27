@@ -7,7 +7,4 @@ check-cert
   In your Terminal ../check-cert/ write "ruby ssl.rb [URL]"
   [URL] start "https://...." -> Check expiring days.
 # Demo
-
-  
-
-
+  ![demo.git](https://github.com/yoji0331/github.io/blob/master/demo/demo.gif)
