@@ -1,10 +1,10 @@
 require 'uri'
 require 'net/https'
 
-$url = ARGV[0] # 引数を取得
-$r_date_s = 30 # 警告期限の宣言
+$url = ARGV[0] # get a argument
+$r_date_s = 30 # declare warning days
 
-# 引数で得たURLのSSL証明書の有効期限の表示
+# show expiring days of SSL Web Server Certificate 
 def GetCertDays(default_url)
 	https = Net::HTTP.new(default_url, 443)
 	https.use_ssl = true
@@ -15,7 +15,7 @@ def GetCertDays(default_url)
 	end
 
 	days_until = ((cert.not_after - Time.now) / (60 * 60 * 24)).to_i
-	p days_until
+	puts "The remaining #{ days_until } days."
 	
 	if days_until <= 0
 		puts "CRITICAL!!"
@@ -26,12 +26,12 @@ def GetCertDays(default_url)
 	end
 end
 
-# 引数を複製して有効な文字列に変換
+# reproduce argument and change argument to valid String 
 tmp = ARGV[0].dup
 $parsed_url = tmp[0..7]
 $parsed2_url = tmp[-1]
 
-# 引数が有効なら実行、無効なら終了
+# If argument is valid, Run GetCertDays function. else exit. return 2
 if $parsed_url == "https://" 			
 	if $parsed2_url == "/"
 		tmp.chop!
@@ -40,6 +40,6 @@ if $parsed_url == "https://"
 	GetCertDays(tmp)
 else
 	puts "ERROR Check URL !!"
-	exit 2
+	exit 1
 end
 
