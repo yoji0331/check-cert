@@ -31,7 +31,7 @@ tmp = ARGV[0].dup
 $parsed_url = tmp[0..7]
 $parsed2_url = tmp[-1]
 
-# If argument is valid, Run GetCertDays function. else exit. return 2
+# If argument is valid, Run GetCertDays function. else exit. return 1
 if $parsed_url == "https://" 			
 	if $parsed2_url == "/"
 		tmp.chop!
